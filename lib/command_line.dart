@@ -97,7 +97,7 @@ class _CommandLineState extends State<CommandLine> {
   }
 
 // Builds and returns the terminal widget for a specific index.
-  Widget _terminal(int index) {
+  Widget _terminal(int index, bool isLargerScreen) {
     TextEditingController controller = TextEditingController();
     _textEdittingControllers.add(controller);
     return Row(children: [
@@ -135,7 +135,7 @@ class _CommandLineState extends State<CommandLine> {
           )),
       Expanded(
           child: TextField(
-        autofocus: true,
+        autofocus: isLargerScreen ? true : false,
         readOnly: _terminalOutputs.length == index + 1 ? true : false,
         style: const TextStyle(color: Colors.white),
         controller: _textEdittingControllers[index],
@@ -149,14 +149,20 @@ class _CommandLineState extends State<CommandLine> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen size using MediaQuery
+    final screenSize = MediaQuery.of(context).size;
+    // Determine if the screen is larger or smaller
+    final bool isLargerScreen = screenSize.width >= 768;
+
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         {_scrollController.jumpTo(_scrollController.position.maxScrollExtent)});
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('images/stars_background.jpg'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.5),
               BlendMode.srcOver,
@@ -171,7 +177,7 @@ class _CommandLineState extends State<CommandLine> {
           itemBuilder: (context, index) {
             return Column(
               children: [
-                _terminal(index),
+                _terminal(index, isLargerScreen),
                 index < _terminalOutputs.length
                     ? _terminalOutputs[index]
                     : Container(),
@@ -181,13 +187,15 @@ class _CommandLineState extends State<CommandLine> {
         ),
       ),
       bottomSheet: Container(
+        color: Colors.black,
+        width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.black.withOpacity(0),
           ),
           image: DecorationImage(
             image: const AssetImage('images/stars_background.jpg'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.6),
               BlendMode.srcOver,
@@ -205,7 +213,7 @@ class _CommandLineState extends State<CommandLine> {
                 ),
                 image: DecorationImage(
                   image: const AssetImage('images/stars_background.jpg'),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.6),
                     BlendMode.srcOver,

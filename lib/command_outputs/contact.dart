@@ -35,7 +35,7 @@ class _ContactState extends State<Contact> {
 
       final Uri emailUri = Uri(
         scheme: 'mailto',
-        path: 'hraColors.pink.shade300helehr@gmail.com',
+        path: 'rahelehhasanirh@gmail.com',
         queryParameters: {
           'subject': subject,
           'body': body,

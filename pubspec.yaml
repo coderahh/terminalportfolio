@@ -76,6 +76,7 @@ flutter:
     - assets/files/resume.pdf
     - assets/images/photo.jpg
     - assets/images/stars_background.jpg
+    - assets/images/stars_background_small.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

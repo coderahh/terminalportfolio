@@ -2,6 +2,10 @@
 
 Terminal Portfolio is a command-line-style portfolio website built using Flutter. It provides an interactive terminal interface where users can enter commands to navigate and explore different sections of the portfolio.
 
+## Live Site
+
+Access the live version that is my own portfolio site at: [https://rahelehhasani.space/](https://rahelehhasani.space/)
+
 ## Features
 
 - Command-line interface: Users can enter commands to interact with the portfolio.
